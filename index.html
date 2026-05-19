@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Italo Soft | Italia – Hamburg Collective</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --cream:      #F5EBD6;
@@ -17,548 +15,110 @@
             --rame:       #7A3B28;
             --espresso:   #1E0E08;
             --ocean:      #1e4d8c;
-            --sun:        #f7d052;
         }
-
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--cream); color: var(--espresso); font-family: 'Space Grotesk', sans-serif; line-height: 1.6; overflow-x: hidden; }
 
-        body {
-            background: var(--cream);
-            color: var(--espresso);
-            font-family: 'Space Grotesk', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        /* bg layer */
+        .bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 
-        /* ── HELPERS ─────────────────────────────────── */
+        /* ornaments */
+        .ornament { display: flex; align-items: center; gap: 10px; justify-content: center; margin: 0 auto; }
+        .ornament::before, .ornament::after { content: ''; flex: 1; height: 0.8px; background: currentColor; opacity: 0.28; }
+        .ornament-inner { display: flex; align-items: center; gap: 7px; }
+        .dia { display: inline-block; width: 7px; height: 7px; background: currentColor; transform: rotate(45deg); opacity: 0.65; }
+        .dia-sm { width: 4px; height: 4px; opacity: 0.35; }
 
-        .serif { font-family: 'Fraunces', serif; }
+        .section-label { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.4; font-family: 'Space Grotesk', sans-serif; font-weight: 600; display: block; text-align: center; margin-bottom: 14px; }
 
-        /* Diamond ornament row */
-        .ornament {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: center;
-            margin: 0 auto;
-        }
-        .ornament::before, .ornament::after {
-            content: '';
-            flex: 1;
-            height: 0.8px;
-            background: currentColor;
-            opacity: 0.35;
-        }
-        .ornament-inner {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-        .dia {
-            display: inline-block;
-            width: 7px; height: 7px;
-            background: currentColor;
-            transform: rotate(45deg);
-            opacity: 0.6;
-        }
-        .dia-sm {
-            width: 4px; height: 4px;
-            opacity: 0.35;
-        }
+        /* wave dividers */
+        .wave { position: relative; z-index: 2; line-height: 0; overflow: hidden; }
+        .wave svg { display: block; width: 100%; }
 
-        /* Section label */
-        .section-label {
-            font-size: 10px;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            opacity: 0.45;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            margin-bottom: 18px;
-            display: block;
-            text-align: center;
-        }
-
-        /* Corner bracket frame */
-        .bracket-frame {
-            position: relative;
-        }
-        .bracket-frame::before, .bracket-frame::after,
-        .bracket-frame .br-bl, .bracket-frame .br-br {
-            content: '';
-            position: absolute;
-            width: 18px; height: 18px;
-            border-color: var(--terracotta);
-            border-style: solid;
-            opacity: 0.55;
-        }
-        .bracket-frame::before { top: 0; left: 0; border-width: 1.5px 0 0 1.5px; }
-        .bracket-frame::after  { top: 0; right: 0; border-width: 1.5px 1.5px 0 0; }
-        .bracket-frame .br-bl  { bottom: 0; left: 0; border-width: 0 0 1.5px 1.5px; content: ''; position: absolute; width: 18px; height: 18px; border-color: var(--terracotta); border-style: solid; opacity: 0.55; }
-        .bracket-frame .br-br  { bottom: 0; right: 0; border-width: 0 1.5px 1.5px 0; content: ''; position: absolute; width: 18px; height: 18px; border-color: var(--terracotta); border-style: solid; opacity: 0.55; }
-
-        /* ── NAVIGATION ──────────────────────────────── */
-
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: rgba(245, 235, 214, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 0.8px solid rgba(196, 96, 58, 0.28);
-        }
-
-        .nav-logo {
-            font-family: 'Fraunces', serif;
-            font-size: 1.05rem;
-            font-weight: 900;
-            letter-spacing: 0.18em;
-            color: var(--espresso);
-            text-decoration: none;
-            text-transform: uppercase;
-        }
+        /* NAV */
+        nav { position: fixed; top: 0; width: 100%; padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(245,235,214,0.93); backdrop-filter: blur(14px); border-bottom: 0.8px solid rgba(196,96,58,0.22); }
+        .nav-logo { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 900; letter-spacing: 0.2em; color: var(--espresso); text-decoration: none; text-transform: uppercase; }
         .nav-logo span { color: var(--terracotta); }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--espresso);
-            margin-left: 32px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            opacity: 0.7;
-            transition: opacity 0.25s, color 0.25s;
-        }
+        .nav-links a { text-decoration: none; color: var(--espresso); margin-left: 30px; font-size: 0.76rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.6; transition: opacity .25s, color .25s; }
         .nav-links a:hover { opacity: 1; color: var(--terracotta); }
+        .menu-toggle { display: none; cursor: pointer; font-size: 1.4rem; }
 
-        .menu-toggle { display: none; cursor: pointer; font-size: 1.4rem; color: var(--espresso); }
+        /* HERO */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 5% 0; position: relative; background: var(--cream); overflow: hidden; }
+        .hero-content { position: relative; z-index: 1; padding-bottom: 80px; }
+        .hero-logo { margin-bottom: 38px; }
+        .hero h1 { font-family: 'Fraunces', serif; font-size: clamp(4.5rem, 11vw, 9rem); font-weight: 800; line-height: 0.88; letter-spacing: -0.02em; text-transform: uppercase; color: var(--espresso); margin-bottom: 10px; }
+        .hero h1 em { font-style: italic; color: var(--terracotta); }
+        .hero-divider { margin: 26px auto; width: 160px; color: var(--terracotta); }
+        .hero-tagline { font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(0.95rem, 1.6vw, 1.18rem); color: var(--rame); opacity: 0.7; }
+        .hero-sub { font-size: 0.76rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--rame); margin-top: 12px; font-weight: 500; }
 
-        /* ── HERO ────────────────────────────────────── */
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 5% 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Faint wave texture backdrop */
-        .hero-waves {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0.06;
-        }
-
-        .hero-logo {
-            margin-bottom: 44px;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-family: 'Fraunces', serif;
-            font-size: clamp(4.5rem, 11vw, 9rem);
-            font-weight: 800;
-            line-height: 0.88;
-            letter-spacing: -0.02em;
-            text-transform: uppercase;
-            color: var(--espresso);
-            margin-bottom: 10px;
-        }
-        .hero h1 em {
-            font-style: italic;
-            color: var(--terracotta);
-        }
-
-        .hero-sub {
-            font-size: 0.78rem;
-            letter-spacing: 0.38em;
-            text-transform: uppercase;
-            color: var(--rame);
-            margin-top: 18px;
-            font-weight: 500;
-        }
-
-        .hero-divider {
-            margin: 28px auto;
-            width: 160px;
-            color: var(--terracotta);
-        }
-
-        .hero-tagline {
-            font-family: 'Fraunces', serif;
-            font-style: italic;
-            font-size: clamp(0.95rem, 1.6vw, 1.2rem);
-            color: var(--rame);
-            opacity: 0.72;
-            letter-spacing: 0.04em;
-        }
-
-        /* ── CONCEPT ─────────────────────────────────── */
-
-        .section-concept {
-            padding: 110px 10%;
-            text-align: center;
-            background: var(--espresso);
-            color: var(--cream);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .concept-bg-circle {
-            position: absolute;
-            width: 600px; height: 600px;
-            border-radius: 50%;
-            border: 0.8px solid rgba(245,235,214,0.1);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-        .concept-bg-circle:nth-child(2) { width: 440px; height: 440px; }
-        .concept-bg-circle:nth-child(3) { width: 280px; height: 280px; }
-
-        .concept-inner { position: relative; max-width: 760px; margin: 0 auto; }
-
-        .concept-inner h2 {
-            font-family: 'Fraunces', serif;
-            font-size: clamp(2.6rem, 5vw, 4rem);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: -0.01em;
-            margin: 24px 0 32px;
-            color: var(--cream);
-        }
+        /* CONCEPT */
+        .section-concept { background: var(--espresso); color: var(--cream); padding: 100px 10% 110px; text-align: center; position: relative; overflow: hidden; }
+        .concept-inner { position: relative; z-index: 1; max-width: 740px; margin: 0 auto; }
+        .concept-inner h2 { font-family: 'Fraunces', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; margin: 22px 0 30px; color: var(--cream); }
         .concept-inner h2 em { color: var(--sand); font-style: italic; }
+        .concept-inner p { font-size: 1.12rem; font-weight: 300; line-height: 1.95; color: rgba(245,235,214,0.66); }
 
-        .concept-inner p {
-            font-size: 1.15rem;
-            font-weight: 300;
-            line-height: 1.9;
-            color: rgba(245,235,214,0.72);
-            margin-bottom: 0;
-        }
-
-        /* ── ARTISTS ─────────────────────────────────── */
-
-        .section-artists {
-            padding: 110px 8%;
-            background: var(--cream);
-        }
-
-        .section-head {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-        .section-head h2 {
-            font-family: 'Fraunces', serif;
-            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: -0.01em;
-            margin: 16px 0;
-        }
-
-        .artist-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
-        }
-
-        .artist-card {
-            position: relative;
-            background: var(--cream);
-            border: 0.8px solid rgba(196,96,58,0.22);
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
-        }
-        .artist-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 28px 60px rgba(30,14,8,0.12);
-        }
-
-        /* Numbered label top-right */
-        .artist-num {
-            position: absolute;
-            top: 14px; right: 16px;
-            font-family: 'Fraunces', serif;
-            font-size: 0.75rem;
-            font-style: italic;
-            color: var(--cream);
-            opacity: 0.7;
-            z-index: 2;
-            letter-spacing: 0.08em;
-        }
-
-        .artist-photo {
-            width: 100%;
-            height: 420px;
-            overflow: hidden;
-            position: relative;
-            background: var(--rame);
-        }
-        .artist-photo::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 55%, rgba(30,14,8,0.55) 100%);
-        }
-        .artist-photo img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            filter: sepia(18%) contrast(1.05);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s;
-        }
+        /* ARTISTS */
+        .section-artists { background: var(--cream); padding: 100px 7% 110px; position: relative; overflow: hidden; }
+        .section-head { text-align: center; margin-bottom: 60px; position: relative; z-index: 1; }
+        .section-head h2 { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; margin: 14px 0 0; }
+        .artist-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; position: relative; z-index: 1; }
+        .artist-card { position: relative; background: var(--cream); border: 0.8px solid rgba(196,96,58,0.22); overflow: hidden; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s; }
+        .artist-card:hover { transform: translateY(-8px); box-shadow: 0 26px 56px rgba(30,14,8,0.12); }
+        .artist-num { position: absolute; top: 14px; right: 16px; font-family: 'Fraunces', serif; font-size: 0.72rem; font-style: italic; color: var(--cream); opacity: 0.72; z-index: 2; }
+        .artist-photo { width: 100%; height: 420px; overflow: hidden; background: var(--rame); position: relative; }
+        .artist-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 52%, rgba(30,14,8,0.52) 100%); }
+        .artist-photo img { width: 100%; height: 100%; object-fit: cover; filter: sepia(18%) contrast(1.05); transition: transform .6s cubic-bezier(.16,1,.3,1), filter .5s; }
         .artist-card:hover img { transform: scale(1.06); filter: sepia(0%) contrast(1.05); }
-
-        .artist-info {
-            padding: 28px 28px 26px;
-        }
-
-        .artist-tag {
-            font-size: 0.72rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--terracotta);
-            font-weight: 700;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .artist-info h3 {
-            font-family: 'Fraunces', serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: -0.01em;
-            margin-bottom: 10px;
-            color: var(--espresso);
-        }
-        .artist-info p {
-            font-size: 0.92rem;
-            color: var(--rame);
-            line-height: 1.75;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        .ig-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            color: var(--espresso);
-            font-weight: 700;
-            font-size: 0.78rem;
-            letter-spacing: 0.08em;
-            border-bottom: 1.5px solid var(--terracotta);
-            padding-bottom: 2px;
-            transition: color 0.25s, border-color 0.25s;
-        }
+        .artist-info { padding: 26px 28px 24px; }
+        .artist-tag { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); font-weight: 700; display: block; margin-bottom: 7px; }
+        .artist-info h3 { font-family: 'Fraunces', serif; font-size: 1.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 9px; }
+        .artist-info p { font-size: 0.9rem; color: var(--rame); line-height: 1.75; margin-bottom: 18px; font-weight: 300; }
+        .ig-btn { display: inline-flex; align-items: center; text-decoration: none; color: var(--espresso); font-weight: 700; font-size: 0.76rem; letter-spacing: 0.08em; border-bottom: 1.5px solid var(--terracotta); padding-bottom: 2px; transition: color .25s; }
         .ig-btn:hover { color: var(--terracotta); }
 
-        /* ── EVENTS ──────────────────────────────────── */
-
-        .section-events {
-            padding: 110px 8%;
-            background: var(--sand);
-        }
-
-        .events-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            margin-top: 70px;
-        }
-
-        .events-col h3 {
-            font-family: 'Fraunces', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: -0.01em;
-            margin-bottom: 30px;
-            color: var(--espresso);
-        }
-
+        /* EVENTS */
+        .section-events { background: var(--sand); padding: 100px 8% 110px; position: relative; overflow: hidden; }
+        .events-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 64px; position: relative; z-index: 1; }
+        .events-col h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 28px; }
         .event-list { list-style: none; }
+        .event-item { padding: 18px 0; border-bottom: 0.8px solid rgba(122,59,40,0.2); display: flex; gap: 20px; align-items: flex-start; }
+        .event-date { font-family: 'Fraunces', serif; font-size: 0.78rem; font-style: italic; color: var(--terracotta); font-weight: 600; min-width: 52px; padding-top: 2px; }
+        .event-name { font-family: 'Fraunces', serif; font-size: 1.02rem; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 3px; }
+        .event-venue { font-size: 0.72rem; color: var(--rame); text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.65; }
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .gallery-img { width: 100%; aspect-ratio: 1; object-fit: cover; filter: sepia(15%) contrast(1.05); transition: filter .4s; }
+        .gallery-img:hover { filter: sepia(0%); }
 
-        .event-item {
-            padding: 20px 0;
-            border-bottom: 0.8px solid rgba(122,59,40,0.22);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 18px;
-        }
-
-        .event-date {
-            font-family: 'Fraunces', serif;
-            font-size: 0.8rem;
-            font-style: italic;
-            color: var(--terracotta);
-            font-weight: 600;
-            min-width: 58px;
-            padding-top: 2px;
-            letter-spacing: 0.06em;
-        }
-
-        .event-info { flex: 1; }
-        .event-name {
-            font-family: 'Fraunces', serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.01em;
-            display: block;
-            margin-bottom: 3px;
-        }
-        .event-venue {
-            font-size: 0.75rem;
-            color: var(--rame);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            opacity: 0.7;
-        }
-
-        /* gallery */
-        .gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        .gallery-img {
-            width: 100%; aspect-ratio: 1;
-            object-fit: cover;
-            filter: sepia(15%) contrast(1.05);
-            transition: filter 0.4s;
-        }
-        .gallery-img:hover { filter: sepia(0%) contrast(1.05); }
-
-        /* ── FOOTER / CONTACT ────────────────────────── */
-
-        footer {
-            background: var(--espresso);
-            color: var(--cream);
-            text-align: center;
-            padding: 100px 5% 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer-rings {
-            position: absolute;
-            bottom: -180px; left: 50%;
-            transform: translateX(-50%);
-            width: 520px; height: 520px;
-            border-radius: 50%;
-            border: 0.8px solid rgba(196,96,58,0.2);
-            pointer-events: none;
-        }
-        .footer-rings::before, .footer-rings::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            border: 0.8px solid rgba(196,96,58,0.14);
-        }
-        .footer-rings::before { inset: 60px; }
-        .footer-rings::after  { inset: 120px; }
-
-        .footer-inner { position: relative; }
-
-        footer .section-label { color: var(--cream); }
-
-        footer h2 {
-            font-family: 'Fraunces', serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            color: var(--sand);
-            margin: 18px 0 36px;
-            line-height: 0.9;
-        }
+        /* FOOTER */
+        footer { background: var(--espresso); color: var(--cream); text-align: center; padding: 100px 5% 60px; position: relative; overflow: hidden; }
+        .footer-inner { position: relative; z-index: 1; }
+        footer h2 { font-family: 'Fraunces', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; color: var(--sand); margin: 18px 0 36px; line-height: 0.9; }
         footer h2 em { color: var(--terracotta); font-style: italic; }
-
-        .contact-mail {
-            font-family: 'Fraunces', serif;
-            font-size: clamp(1.1rem, 2.5vw, 1.7rem);
-            color: var(--cream);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(196,96,58,0.5);
-            padding-bottom: 3px;
-            transition: color 0.3s, border-color 0.3s;
-            letter-spacing: 0.02em;
-        }
+        .contact-mail { font-family: 'Fraunces', serif; font-size: clamp(1.05rem, 2.3vw, 1.6rem); color: var(--cream); text-decoration: none; border-bottom: 1px solid rgba(196,96,58,0.45); padding-bottom: 3px; transition: color .3s, border-color .3s; }
         .contact-mail:hover { color: var(--sand); border-color: var(--sand); }
-
-        .social-footer {
-            margin-top: 52px;
-            display: flex;
-            justify-content: center;
-            gap: 36px;
-        }
-        .social-footer a {
-            color: rgba(245,235,214,0.55);
-            text-decoration: none;
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
+        .social-footer { margin-top: 48px; display: flex; justify-content: center; gap: 34px; }
+        .social-footer a { color: rgba(245,235,214,0.5); text-decoration: none; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; transition: color .3s; }
         .social-footer a:hover { color: var(--sand); }
-
-        .footer-divider {
-            margin: 56px auto 56px;
-            color: var(--terracotta);
-            width: 200px;
-        }
-
-        .footer-copy {
-            font-size: 0.68rem;
-            opacity: 0.3;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-        }
-
-        /* ── RESPONSIVE ──────────────────────────────── */
+        .footer-copy { font-size: 0.66rem; opacity: 0.28; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 56px; }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 65px; left: 0;
-                width: 100%;
-                background: var(--cream);
-                padding: 20px 0;
-                text-align: center;
-                border-bottom: 1.5px solid var(--terracotta);
-            }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: var(--cream); padding: 20px 0; text-align: center; border-bottom: 1.5px solid var(--terracotta); }
             .nav-links.active { display: flex; }
             .nav-links a { margin: 12px 0; font-size: 1rem; }
             .menu-toggle { display: block; }
-
-            .events-grid { grid-template-columns: 1fr; gap: 50px; }
-            .artist-photo { height: 330px; }
-            .social-footer { flex-direction: column; gap: 18px; }
+            .events-grid { grid-template-columns: 1fr; gap: 44px; }
+            .artist-photo { height: 320px; }
+            .social-footer { flex-direction: column; gap: 16px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ── NAV ───────────────────────────────────────────── -->
 <nav>
-    <a href="#" class="nav-logo serif">ITALO <span>SOFT</span></a>
+    <a href="#" class="nav-logo">ITALO <span>SOFT</span></a>
     <div class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</div>
     <div class="nav-links">
         <a href="#concept">Concept</a>
@@ -568,175 +128,90 @@
     </div>
 </nav>
 
-<!-- ── HERO ──────────────────────────────────────────── -->
+<!-- ══════════════════════════════════════ HERO -->
 <header class="hero">
-
-    <!-- faint wavy texture -->
-    <svg class="hero-waves" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <script>
-        (function(){
-            var svg = document.currentScript.parentNode;
-            var cx = 600, cy = 400;
-            for (var w = 0; w < 18; w++) {
-                var wy = 50 + w * 40;
-                var d = 'M 0 ' + wy;
-                var x = 0;
-                while (x < 1200) {
-                    var mx = (x + 20).toFixed(1);
-                    var my = (wy + (w % 2 === 0 ? 6 : -6)).toFixed(1);
-                    var nx = (x + 40).toFixed(1);
-                    d += ' Q ' + mx + ' ' + my + ' ' + nx + ' ' + wy;
-                    x += 40;
-                }
-                var path = document.createElementNS('http://www.w3.org/2000/svg','path');
-                path.setAttribute('d', d);
-                path.setAttribute('fill','none');
-                path.setAttribute('stroke','#C4603A');
-                path.setAttribute('stroke-width','0.9');
-                svg.appendChild(path);
-            }
-        })();
-        </script>
-    </svg>
-
-    <!-- Inline logo SVG -->
-    <div class="hero-logo">
-        <svg viewBox="0 0 180 180" width="200" height="200" aria-label="Italo Soft logo" role="img">
-            <defs><clipPath id="hc"><circle cx="90" cy="86" r="68"/></clipPath></defs>
-
-            <!-- corner brackets -->
-            <line x1="4" y1="20" x2="4" y2="4" stroke="#C4603A" stroke-width="1.6" opacity="0.7"/>
-            <line x1="4" y1="4" x2="20" y2="4" stroke="#C4603A" stroke-width="1.6" opacity="0.7"/>
-            <line x1="176" y1="20" x2="176" y2="4" stroke="#C4603A" stroke-width="1.6" opacity="0.7"/>
-            <line x1="176" y1="4" x2="160" y2="4" stroke="#C4603A" stroke-width="1.6" opacity="0.7"/>
-            <line x1="4" y1="160" x2="4" y2="176" stroke="#C4603A" stroke-width="1.6" opacity="0.7"/>
-            <line x1="4" y1="176" x2="20" y2="176" stroke="#C4603A" stroke-width="1.6" opacity="0.7"/>
-            <line x1="176" y1="160" x2="176" y2="176" stroke="#C4603A" stroke-width="1.6" opacity="0.7"/>
-            <line x1="176" y1="176" x2="160" y2="176" stroke="#C4603A" stroke-width="1.6" opacity="0.7"/>
-            <rect x="4" y="4" width="172" height="172" fill="none" stroke="#C4603A" stroke-width="0.4" opacity="0.2"/>
-
-            <g clip-path="url(#hc)">
-                <!-- waves inside circle -->
-                <g id="hw" opacity="1"></g>
-                <!-- rays -->
-                <g id="hr"></g>
-                <!-- inner rings -->
-                <circle cx="90" cy="86" r="51" fill="none" stroke="#C4603A" stroke-width="0.8" opacity="0.22"/>
-                <circle cx="90" cy="86" r="35" fill="none" stroke="#C4603A" stroke-width="0.8" opacity="0.18"/>
-            </g>
-
-            <!-- outer ring + horizon line -->
-            <circle cx="90" cy="86" r="68" fill="none" stroke="#C4603A" stroke-width="1.6"/>
-            <line x1="22" y1="86" x2="158" y2="86" stroke="#C4603A" stroke-width="1"/>
-
-            <!-- half-sun fill -->
-            <path d="M 72 86 A 18 18 0 0 0 108 86 Z" fill="#C4603A"/>
-            <circle cx="90" cy="86" r="18" fill="none" stroke="#C4603A" stroke-width="1"/>
-            <circle cx="90" cy="86" r="2.5" fill="#C4603A" opacity="0.65"/>
-        </svg>
-    </div>
-
-    <h1>Italo<br><em>Soft</em></h1>
-
-    <div class="hero-divider ornament" style="color:var(--terracotta);">
-        <div class="ornament-inner">
-            <span class="dia dia-sm"></span>
-            <span class="dia"></span>
-            <span class="dia dia-sm"></span>
+    <div class="bg" id="hero-bg"></div>
+    <div class="hero-content">
+        <div class="hero-logo">
+            <svg viewBox="0 0 180 180" width="190" height="190" aria-label="Italo Soft sun logo" role="img">
+                <defs><clipPath id="hc"><circle cx="90" cy="86" r="68"/></clipPath></defs>
+                <line x1="4" y1="20" x2="4" y2="4" stroke="#C4603A" stroke-width="1.6" opacity="0.65"/>
+                <line x1="4" y1="4" x2="20" y2="4" stroke="#C4603A" stroke-width="1.6" opacity="0.65"/>
+                <line x1="176" y1="20" x2="176" y2="4" stroke="#C4603A" stroke-width="1.6" opacity="0.65"/>
+                <line x1="176" y1="4" x2="160" y2="4" stroke="#C4603A" stroke-width="1.6" opacity="0.65"/>
+                <line x1="4" y1="160" x2="4" y2="176" stroke="#C4603A" stroke-width="1.6" opacity="0.65"/>
+                <line x1="4" y1="176" x2="20" y2="176" stroke="#C4603A" stroke-width="1.6" opacity="0.65"/>
+                <line x1="176" y1="160" x2="176" y2="176" stroke="#C4603A" stroke-width="1.6" opacity="0.65"/>
+                <line x1="176" y1="176" x2="160" y2="176" stroke="#C4603A" stroke-width="1.6" opacity="0.65"/>
+                <rect x="4" y="4" width="172" height="172" fill="none" stroke="#C4603A" stroke-width="0.4" opacity="0.18"/>
+                <g clip-path="url(#hc)">
+                    <g id="hw"></g>
+                    <g id="hr"></g>
+                    <circle cx="90" cy="86" r="51" fill="none" stroke="#C4603A" stroke-width="0.8" opacity="0.2"/>
+                    <circle cx="90" cy="86" r="35" fill="none" stroke="#C4603A" stroke-width="0.8" opacity="0.15"/>
+                </g>
+                <circle cx="90" cy="86" r="68" fill="none" stroke="#C4603A" stroke-width="1.6"/>
+                <line x1="22" y1="86" x2="158" y2="86" stroke="#C4603A" stroke-width="1"/>
+                <path d="M 72 86 A 18 18 0 0 0 108 86 Z" fill="#C4603A"/>
+                <circle cx="90" cy="86" r="18" fill="none" stroke="#C4603A" stroke-width="1"/>
+                <circle cx="90" cy="86" r="2.8" fill="#C4603A" opacity="0.6"/>
+            </svg>
         </div>
-    </div>
-
-    <p class="hero-tagline">Domenica mattina. Musica morbida.</p>
-    <p class="hero-sub" style="margin-top:10px;">
-        <span style="color:var(--ocean); opacity:0.8;">♦</span>&nbsp; Hamburg
-    </p>
-
-    <script>
-    // draw waves + rays into the hero logo
-    (function(){
-        var hw = document.getElementById('hw');
-        var hr = document.getElementById('hr');
-        var cx = 90, cy = 86, OR = 68, IR = 18;
-        // waves
-        for (var w = 0; w < 5; w++) {
-            var wy = cy + 10 + w * 12;
-            var sx = cx - OR + 8, ex = cx + OR - 8;
-            var d = 'M ' + sx + ' ' + wy, x = sx, dir = -1;
-            while (x + 9 <= ex) {
-                var mx = (x + 4.5).toFixed(1), my = (wy + dir * 3).toFixed(1), nx = (x + 9).toFixed(1);
-                d += ' Q ' + mx + ' ' + my + ' ' + nx + ' ' + wy;
-                dir *= -1; x += 9;
-            }
-            var p = document.createElementNS('http://www.w3.org/2000/svg','path');
-            p.setAttribute('d', d); p.setAttribute('fill','none');
-            p.setAttribute('stroke','#C4603A'); p.setAttribute('stroke-width','0.7');
-            p.setAttribute('opacity', (0.14 + w * 0.04).toFixed(2));
-            hw.appendChild(p);
-        }
-        // rays
-        for (var i = 0; i < 17; i++) {
-            var a = (183 + i * 174 / 16) * Math.PI / 180;
-            var x1 = (cx + IR * Math.cos(a)).toFixed(2), y1 = (cy + IR * Math.sin(a)).toFixed(2);
-            var x2 = (cx + OR * Math.cos(a)).toFixed(2), y2 = (cy + OR * Math.sin(a)).toFixed(2);
-            var thick = i % 2 === 0;
-            var l = document.createElementNS('http://www.w3.org/2000/svg','line');
-            l.setAttribute('x1',x1); l.setAttribute('y1',y1);
-            l.setAttribute('x2',x2); l.setAttribute('y2',y2);
-            l.setAttribute('stroke','#C4603A');
-            l.setAttribute('stroke-width', thick ? '2.2' : '0.6');
-            l.setAttribute('stroke-linecap','round');
-            l.setAttribute('opacity', thick ? '0.82' : '0.3');
-            hr.appendChild(l);
-        }
-    })();
-    </script>
-
-</header>
-
-<!-- ── CONCEPT ────────────────────────────────────────── -->
-<section id="concept" class="section-concept">
-    <div class="concept-bg-circle"></div>
-    <div class="concept-bg-circle"></div>
-    <div class="concept-bg-circle"></div>
-
-    <div class="concept-inner">
-        <span class="section-label" style="color:var(--sand);">Il Collettivo</span>
-
-        <div class="ornament" style="color:var(--terracotta); margin-bottom:24px; width:140px;">
+        <h1>Italo<br><em>Soft</em></h1>
+        <div class="hero-divider ornament">
             <div class="ornament-inner"><span class="dia dia-sm"></span><span class="dia"></span><span class="dia dia-sm"></span></div>
         </div>
+        <p class="hero-tagline">Domenica mattina. Musica morbida.</p>
+        <p class="hero-sub"><span style="color:var(--ocean);opacity:.8;">♦</span>&nbsp; Hamburg</p>
+    </div>
+</header>
 
+<!-- wave cream → espresso -->
+<div class="wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" height="120">
+        <path d="M0,40 C200,90 400,10 600,50 C800,90 1040,8 1260,46 C1340,60 1400,35 1440,48 L1440,120 L0,120 Z" fill="#1E0E08"/>
+        <path d="M0,22 C200,62 400,0 600,30 C800,60 1040,0 1260,26 C1340,38 1400,16 1440,26 L1440,0 L0,0 Z" fill="#F5EBD6"/>
+    </svg>
+</div>
+
+<!-- ══════════════════════════════════════ CONCEPT -->
+<section id="concept" class="section-concept">
+    <div class="bg" id="concept-bg"></div>
+    <div class="concept-inner">
+        <span class="section-label" style="color:var(--sand);">Il Collettivo</span>
+        <div class="ornament" style="color:var(--terracotta); width:140px; margin-bottom:22px;">
+            <div class="ornament-inner"><span class="dia dia-sm"></span><span class="dia"></span><span class="dia dia-sm"></span></div>
+        </div>
         <h2>Il suono<br>del <em>Mediterraneo</em></h2>
-
-        <p>
-            Italo Soft è un crocevia sonoro tra il Mediterraneo e l'anima industriale di Amburgo.
-            Una famiglia di musicisti e DJ dedicata alla riscoperta del groove mediterraneo —
-            mescolando classici senza tempo, folclore italico e beat elettronici d'avanguardia.
-        </p>
-
-        <div class="ornament" style="color:rgba(245,235,214,0.2); margin-top:44px; width:180px;">
+        <p>Italo Soft è un crocevia sonoro tra il Mediterraneo e l'anima industriale di Amburgo. Una famiglia di musicisti e DJ dedicata alla riscoperta del groove mediterraneo — mescolando classici senza tempo, folclore italico e beat elettronici d'avanguardia.</p>
+        <div class="ornament" style="color:rgba(245,235,214,0.18); margin-top:42px; width:180px;">
             <div class="ornament-inner"><span class="dia dia-sm"></span><span class="dia"></span><span class="dia dia-sm"></span></div>
         </div>
     </div>
 </section>
 
-<!-- ── ARTISTS ────────────────────────────────────────── -->
+<!-- wave espresso → cream -->
+<div class="wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" height="120">
+        <path d="M0,50 C220,14 440,82 660,44 C880,8 1100,76 1320,42 C1380,32 1420,55 1440,50 L1440,120 L0,120 Z" fill="#F5EBD6"/>
+        <path d="M0,28 C220,0 440,58 660,22 C880,0 1100,52 1320,18 C1380,8 1420,30 1440,26 L1440,0 L0,0 Z" fill="#1E0E08"/>
+    </svg>
+</div>
+
+<!-- ══════════════════════════════════════ ARTISTS -->
 <section id="artisti" class="section-artists">
+    <div class="bg" id="artists-bg"></div>
     <div class="section-head">
         <span class="section-label">I Nostri Progetti</span>
-        <div class="ornament" style="color:var(--terracotta); width:140px; margin-bottom:16px;">
+        <div class="ornament" style="color:var(--terracotta); width:140px; margin-bottom:14px;">
             <div class="ornament-inner"><span class="dia dia-sm"></span><span class="dia"></span><span class="dia dia-sm"></span></div>
         </div>
         <h2>Gli Artisti</h2>
     </div>
-
     <div class="artist-grid">
-
         <div class="artist-card">
             <span class="artist-num">No. 01</span>
-            <div class="artist-photo">
-                <img src="ale_und_ori.jpeg" alt="Ale und Ori">
-            </div>
+            <div class="artist-photo"><img src="ale_und_ori.jpeg" alt="Ale und Ori"></div>
             <div class="artist-info">
                 <span class="artist-tag">Live Music · Duo</span>
                 <h3>Ale und Ori</h3>
@@ -744,12 +219,9 @@
                 <a href="https://instagram.com/ale_und_ori" class="ig-btn">@ale_und_ori →</a>
             </div>
         </div>
-
         <div class="artist-card">
             <span class="artist-num">No. 02</span>
-            <div class="artist-photo">
-                <img src="disco_kiosco.jpeg" alt="Disco Kiosco">
-            </div>
+            <div class="artist-photo"><img src="disco_kiosco.jpeg" alt="Disco Kiosco"></div>
             <div class="artist-info">
                 <span class="artist-tag">DJ Duo · Vinyl</span>
                 <h3>Disco Kiosco</h3>
@@ -757,12 +229,9 @@
                 <a href="https://instagram.com/disco_kiosco" class="ig-btn">@disco_kiosco →</a>
             </div>
         </div>
-
         <div class="artist-card">
             <span class="artist-num">No. 03</span>
-            <div class="artist-photo">
-                <img src="gab.jpeg" alt="GAB">
-            </div>
+            <div class="artist-photo"><img src="gab.jpeg" alt="GAB"></div>
             <div class="artist-info">
                 <span class="artist-tag">Solo DJ · House</span>
                 <h3>GAB</h3>
@@ -770,49 +239,45 @@
                 <a href="https://instagram.com/gab_dj" class="ig-btn">@gab_dj →</a>
             </div>
         </div>
-
     </div>
 </section>
 
-<!-- ── EVENTS ─────────────────────────────────────────── -->
+<!-- wave cream → sand -->
+<div class="wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" height="120">
+        <path d="M0,44 C240,90 480,10 720,52 C960,94 1200,12 1440,46 L1440,120 L0,120 Z" fill="#E8C99A"/>
+        <path d="M0,24 C240,64 480,0 720,30 C960,62 1200,0 1440,24 L1440,0 L0,0 Z" fill="#F5EBD6"/>
+    </svg>
+</div>
+
+<!-- ══════════════════════════════════════ EVENTS -->
 <section id="eventi" class="section-events">
+    <div class="bg" id="events-bg"></div>
     <div class="section-head">
         <span class="section-label" style="color:var(--rame);">Live</span>
-        <div class="ornament" style="color:var(--terracotta); width:140px; margin-bottom:16px;">
+        <div class="ornament" style="color:var(--terracotta); width:140px; margin-bottom:14px;">
             <div class="ornament-inner"><span class="dia dia-sm"></span><span class="dia"></span><span class="dia dia-sm"></span></div>
         </div>
         <h2>Dates &amp; Memories</h2>
     </div>
-
     <div class="events-grid">
-
         <div class="events-col">
             <h3>Future Gigs</h3>
             <ul class="event-list">
                 <li class="event-item">
                     <span class="event-date">24 GIU</span>
-                    <div class="event-info">
-                        <span class="event-name">Bar Mediterraneo Night</span>
-                        <span class="event-venue">Hafenklang, Hamburg</span>
-                    </div>
+                    <div><span class="event-name">Bar Mediterraneo Night</span><span class="event-venue">Hafenklang, Hamburg</span></div>
                 </li>
                 <li class="event-item">
                     <span class="event-date">12 LUG</span>
-                    <div class="event-info">
-                        <span class="event-name">Open Air Sunset Session</span>
-                        <span class="event-venue">Golden Pudel, Hamburg</span>
-                    </div>
+                    <div><span class="event-name">Open Air Sunset Session</span><span class="event-venue">Golden Pudel, Hamburg</span></div>
                 </li>
                 <li class="event-item">
                     <span class="event-date">05 AGO</span>
-                    <div class="event-info">
-                        <span class="event-name">Italo Soft Showcase</span>
-                        <span class="event-venue">Mojo Club, Hamburg</span>
-                    </div>
+                    <div><span class="event-name">Italo Soft Showcase</span><span class="event-venue">Mojo Club, Hamburg</span></div>
                 </li>
             </ul>
         </div>
-
         <div class="events-col">
             <h3>Memories</h3>
             <div class="gallery">
@@ -822,39 +287,155 @@
                 <img src="https://images.pexels.com/photos/1763071/pexels-photo-1763071.jpeg?auto=compress&cs=tinysrgb&w=400" class="gallery-img" alt="Past event">
             </div>
         </div>
-
     </div>
 </section>
 
-<!-- ── FOOTER ─────────────────────────────────────────── -->
+<!-- wave sand → espresso -->
+<div class="wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" height="120">
+        <path d="M0,48 C200,92 480,8 720,50 C960,92 1200,10 1440,48 L1440,120 L0,120 Z" fill="#1E0E08"/>
+        <path d="M0,26 C200,66 480,0 720,28 C960,60 1200,0 1440,26 L1440,0 L0,0 Z" fill="#E8C99A"/>
+    </svg>
+</div>
+
+<!-- ══════════════════════════════════════ FOOTER -->
 <footer id="contatti">
-    <div class="footer-rings"></div>
-
+    <div class="bg" id="footer-bg"></div>
     <div class="footer-inner">
-
-        <span class="section-label" style="opacity:0.4; letter-spacing:0.24em;">Get in touch</span>
-
-        <div class="ornament footer-divider" style="color:rgba(196,96,58,0.4);">
+        <span class="section-label" style="opacity:.35; letter-spacing:.24em;">Get in touch</span>
+        <div class="ornament" style="color:rgba(196,96,58,.35); width:200px; margin:0 auto;">
             <div class="ornament-inner"><span class="dia dia-sm"></span><span class="dia"></span><span class="dia dia-sm"></span></div>
         </div>
-
-        <h2>Parliamo?<br><em>Scriveteci.</em></h2>
-
+        <h2 style="margin-top:20px;">Parliamo?<br><em>Scriveteci.</em></h2>
         <a href="mailto:info@italosoft.com" class="contact-mail">info@italosoft.com</a>
-
         <div class="social-footer">
             <a href="#">Instagram</a>
             <a href="#">Soundcloud</a>
             <a href="#">Facebook</a>
         </div>
-
-        <div class="ornament footer-divider" style="color:rgba(196,96,58,0.2); margin-top:60px;">
+        <div class="ornament" style="color:rgba(196,96,58,.2); width:200px; margin:52px auto 0;">
             <div class="ornament-inner"><span class="dia dia-sm"></span><span class="dia"></span><span class="dia dia-sm"></span></div>
         </div>
-
         <p class="footer-copy">© 2026 Italo Soft Collective · From Italy to Hamburg with love</p>
     </div>
 </footer>
 
+<script>
+var NS = 'http://www.w3.org/2000/svg';
+function mkSvg(w,h){ var s=document.createElementNS(NS,'svg'); s.setAttribute('viewBox','0 0 '+w+' '+h); s.setAttribute('width','100%'); s.setAttribute('height','100%'); s.setAttribute('preserveAspectRatio','xMidYMid slice'); s.style.cssText='position:absolute;inset:0;'; return s; }
+function el(tag,attrs){ var e=document.createElementNS(NS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); return e; }
+function addRing(svg,cx,cy,r,stroke,opacity,sw){ svg.appendChild(el('circle',{cx:cx,cy:cy,r:r,fill:'none',stroke:stroke,'stroke-width':sw||0.8,opacity:opacity})); }
+function addSpoke(svg,cx,cy,r1,r2,angleDeg,stroke,opacity,sw){ var a=angleDeg*Math.PI/180; svg.appendChild(el('line',{x1:(cx+r1*Math.cos(a)).toFixed(2),y1:(cy+r1*Math.sin(a)).toFixed(2),x2:(cx+r2*Math.cos(a)).toFixed(2),y2:(cy+r2*Math.sin(a)).toFixed(2),stroke:stroke,'stroke-width':sw||0.6,opacity:opacity})); }
+function addDia(svg,x,y,s,fill,opacity){ svg.appendChild(el('path',{d:'M'+x+','+(y-s)+' L'+(x+s)+','+y+' L'+x+','+(y+s)+' L'+(x-s)+','+y+' Z',fill:fill,opacity:opacity})); }
+function addWaveLine(svg,W,y0,amp,wl,stroke,opacity,sw){
+    var d='M 0 '+y0, x=0, dir=1;
+    while(x+wl/2<=W){ var mx=(x+wl/4).toFixed(1),my=(y0+dir*amp).toFixed(1),nx=(x+wl/2).toFixed(1); d+=' Q '+mx+' '+my+' '+nx+' '+y0; dir*=-1; x+=wl/2; }
+    svg.appendChild(el('path',{d:d,fill:'none',stroke:stroke,'stroke-width':sw||0.8,opacity:opacity}));
+}
+
+// ── HERO BG ─────────────────────────────────────────
+(function(){
+    var bg=document.getElementById('hero-bg'), W=1440, H=900;
+    var svg=mkSvg(W,H); bg.appendChild(svg);
+    var cx=W/2, cy=H*0.45;
+    // concentric rings
+    [70,140,215,298,390,492,606,730,860].forEach(function(r){ addRing(svg,cx,cy,r,'#C4603A',0.065,0.75); });
+    // radial spokes every 15°
+    for(var i=0;i<24;i++){ addSpoke(svg,cx,cy,65,860,i*15,'#C4603A',0.038,0.55); }
+    // wave stripes lower half
+    for(var w=0;w<16;w++){ addWaveLine(svg,W,H*0.60+w*22,10,190,'#C4603A',0.038+w*0.002,0.7); }
+    // scattered diamonds
+    [[80,100],[W-90,80],[W-70,H-120],[65,H-95],[W*0.28,H*0.88],[W*0.74,H*0.91],[W*0.12,H*0.5],[W*0.9,H*0.5]].forEach(function(p){
+        addDia(svg,p[0],p[1],9,'#C4603A',0.1); addDia(svg,p[0]+20,p[1]+2,4,'#C4603A',0.06);
+    });
+})();
+
+// ── LOGO rays + waves ───────────────────────────────
+(function(){
+    var hw=document.getElementById('hw'), hr=document.getElementById('hr');
+    var cx=90,cy=86,OR=68,IR=18;
+    for(var w=0;w<5;w++){
+        var wy=cy+10+w*12, sx=cx-OR+8, ex=cx+OR-8;
+        var d='M '+sx+' '+wy, x=sx, dir=-1;
+        while(x+9<=ex){ var mx=(x+4.5).toFixed(1),my=(wy+dir*3).toFixed(1),nx=(x+9).toFixed(1); d+=' Q '+mx+' '+my+' '+nx+' '+wy; dir*=-1; x+=9; }
+        var p=document.createElementNS(NS,'path'); p.setAttribute('d',d); p.setAttribute('fill','none'); p.setAttribute('stroke','#C4603A'); p.setAttribute('stroke-width','0.7'); p.setAttribute('opacity',(0.13+w*0.04).toFixed(2)); hw.appendChild(p);
+    }
+    for(var i=0;i<17;i++){
+        var a=(183+i*174/16)*Math.PI/180;
+        var l=document.createElementNS(NS,'line');
+        l.setAttribute('x1',(cx+IR*Math.cos(a)).toFixed(2)); l.setAttribute('y1',(cy+IR*Math.sin(a)).toFixed(2));
+        l.setAttribute('x2',(cx+OR*Math.cos(a)).toFixed(2)); l.setAttribute('y2',(cy+OR*Math.sin(a)).toFixed(2));
+        l.setAttribute('stroke','#C4603A'); l.setAttribute('stroke-width',i%2===0?'2.2':'0.6');
+        l.setAttribute('stroke-linecap','round'); l.setAttribute('opacity',i%2===0?'0.82':'0.3');
+        hr.appendChild(l);
+    }
+})();
+
+// ── CONCEPT BG ──────────────────────────────────────
+(function(){
+    var bg=document.getElementById('concept-bg'), W=1440, H=700;
+    var svg=mkSvg(W,H); bg.appendChild(svg);
+    var cx=W/2, cy=H/2;
+    // large ring system + spokes
+    [80,160,255,365,490,635,800].forEach(function(r){ addRing(svg,cx,cy,r,'#F5EBD6',0.07,0.8); });
+    for(var i=0;i<18;i++){ addSpoke(svg,cx,cy,75,800,i*20,'#F5EBD6',0.038,0.5); }
+    // giant "ITALO" watermark
+    var t=el('text',{x:cx,y:cy+32,'text-anchor':'middle','font-family':'Fraunces,Georgia,serif','font-size':'165','font-weight':'900','letter-spacing':'16',fill:'#F5EBD6',opacity:'0.028'}); t.textContent='ITALO'; svg.appendChild(t);
+    var t2=el('text',{x:cx,y:cy+172,'text-anchor':'middle','font-family':'Fraunces,Georgia,serif','font-size':'95','font-style':'italic','letter-spacing':'28',fill:'#C4603A',opacity:'0.07'}); t2.textContent='soft'; svg.appendChild(t2);
+    // wave bands top & bottom
+    for(var w=0;w<5;w++){ addWaveLine(svg,W,28+w*18,7,210,'#F5EBD6',0.04,0.7); addWaveLine(svg,W,H-28-w*18,7,210,'#F5EBD6',0.04,0.7); }
+    // corner diamonds
+    [[55,55],[W-55,55],[55,H-55],[W-55,H-55]].forEach(function(p){ addDia(svg,p[0],p[1],9,'#C4603A',0.2); addDia(svg,p[0]+22,p[1]+2,4,'#F5EBD6',0.14); });
+})();
+
+// ── ARTISTS BG ──────────────────────────────────────
+(function(){
+    var bg=document.getElementById('artists-bg'), W=1440, H=950;
+    var svg=mkSvg(W,H); bg.appendChild(svg);
+    // large half-sun top-right corner
+    var cx=W+60, cy=-60;
+    [170,260,360,470,590,720].forEach(function(r){ addRing(svg,cx,cy,r,'#C4603A',0.048,0.8); });
+    for(var i=0;i<16;i++){ addSpoke(svg,cx,cy,155,720,150+i*18,'#C4603A',0.038,0.55); }
+    // dot grid
+    for(var gx=30;gx<W;gx+=52){ for(var gy=30;gy<H;gy+=52){ svg.appendChild(el('circle',{cx:gx,cy:gy,r:1.3,fill:'#C4603A',opacity:0.055})); } }
+    // three faint horizontal rules
+    [H*0.26,H*0.52,H*0.78].forEach(function(y){ svg.appendChild(el('line',{x1:60,y1:y,x2:W-60,y2:y,stroke:'#C4603A','stroke-width':0.5,opacity:0.065})); });
+    // small half-sun bottom-left mirror
+    var cx2=-60, cy2=H+60;
+    [140,230,330].forEach(function(r){ addRing(svg,cx2,cy2,r,'#C4603A',0.04,0.8); });
+})();
+
+// ── EVENTS BG ───────────────────────────────────────
+(function(){
+    var bg=document.getElementById('events-bg'), W=1440, H=850;
+    var svg=mkSvg(W,H); bg.appendChild(svg);
+    // vinyl record center-left
+    var cx=280, cy=H/2+80;
+    [30,68,112,162,218,282,354,434,520].forEach(function(r){ addRing(svg,cx,cy,r,'#7A3B28',0.08,0.9); });
+    svg.appendChild(el('circle',{cx:cx,cy:cy,r:18,fill:'#7A3B28',opacity:0.07}));
+    // wave field across mid-section
+    for(var w=0;w<14;w++){ addWaveLine(svg,W,H*0.25+w*30,14,230,'#7A3B28',0.038+w*0.004,0.85); }
+    // diamond cluster bottom-right
+    var pts=[[W-110,75],[W-80,112],[W-148,118],[W-55,165],[W-105,205],[W-170,72]];
+    pts.forEach(function(p,i){ addDia(svg,p[0],p[1],i<3?9:5,'#7A3B28',0.11); });
+    // small ring top-right accent
+    [50,90,135].forEach(function(r){ addRing(svg,W-90,80,r,'#C4603A',0.045,0.7); });
+})();
+
+// ── FOOTER BG ───────────────────────────────────────
+(function(){
+    var bg=document.getElementById('footer-bg'), W=1440, H=720;
+    var svg=mkSvg(W,H); bg.appendChild(svg);
+    var cx=W/2, cy=H+100;
+    // rising rings from below
+    [110,220,345,490,650,830,1040,1270].forEach(function(r){ addRing(svg,cx,cy,r,'#C4603A',0.1,0.85); });
+    // dense upward ray fan
+    for(var i=0;i<36;i++){ addSpoke(svg,cx,cy,100,1270,180+i*(180/35),'#C4603A',0.055,0.6); }
+    // wave band near top
+    for(var w=0;w<9;w++){ addWaveLine(svg,W,18+w*20,8,190,'#F5EBD6',0.038+w*0.006,0.7); }
+    // scattered diamonds
+    [[W*0.18,H*0.14],[W*0.82,H*0.12],[W*0.12,H*0.62],[W*0.88,H*0.6],[W*0.5,H*0.08]].forEach(function(p){ addDia(svg,p[0],p[1],9,'#C4603A',0.2); addDia(svg,p[0]+22,p[1]-4,4,'#C4603A',0.11); });
+})();
+</script>
 </body>
 </html>
